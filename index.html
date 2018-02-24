@@ -1,62 +1,75 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Hello World</title>
-    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="text/babel">
-    class NameForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: ''};
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #myChart
+         {
+             width:1024px !important;
+             height:800px !important;
+             
+         }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+   
+</head>
+<body>
+   
+   
+    <canvas id="myChart" width="1000px"; height="900px";>
+    </canvas>
+    <script>
+var labels=[],data=[];
+         $.getJSON('custom.json', function (json)
+         {
+             console.log(json);
+              json.map(function(item) {
+             labels.push(item.class) ;
+             data.push(item.classaverage);
+      });
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
 
-  handleChange(event) {
-    this.setState({value: event.target.value});
-  }
+    //   var datas = json.map(function(average) {
+    //     return average.classaverage;
+    //   });
+      
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: labels,
+        datasets: [{
+            data:data,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ]
+           
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
 
-  handleSubmit(event) {
-    alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.value} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
-    );
-  }
-}
-
-ReactDOM.render(
-  <NameForm />,
-  document.getElementById('root')
-);
-     </script>
-    <!--
-      Note: this page is a great way to try React but it's not suitable for production.
-      It slowly compiles JSX with Babel in the browser and uses a large development build of React.
-
-      To set up a production-ready React build environment, follow these instructions:
-      * https://reactjs.org/docs/add-react-to-a-new-app.html
-      * https://reactjs.org/docs/add-react-to-an-existing-app.html
-
-      You can also use React without JSX, in which case you can remove Babel:
-      * https://reactjs.org/docs/react-without-jsx.html
-      * https://reactjs.org/docs/cdn-links.html
-    -->
-  </body>
+});
+});
+    </script>
+</body>
 </html>
