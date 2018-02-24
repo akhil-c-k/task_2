@@ -1,0 +1,28 @@
+[
+    {
+      "countries" :"india",
+      "population":"70"
+    },
+
+   {
+    "countries" :"usa",
+    "population":"60"
+   },
+
+   {
+    "countries" :"germany",
+    "population":"90"  
+   },
+
+   {
+    "countries" :"nepal",
+    "population":"80" 
+   },
+
+   {
+    "countries" :"spain",
+    "population":"60"
+   }
+   
+   ]
+
